@@ -55,15 +55,12 @@ async def favicon():
     return {"status": "ok"}
 
 
-if __name__ == '__main__':
+# Функция для установки вебхука
+def set_webhook():
     config = load_config('config')
     TOKEN = config.tg_bot.token
-    # TOKEN = '6451700525:AAHrvFtmXWikJr643nkGYgkDbm8UcFm_9oQ'
     WEBHOOK_URL = config.webhook_url.url
-    # WEBHOOK_URL='https://9daf-5-178-148-223.ngrok-free.app/webhook'
 
-
-    # Настройка вебхука
     url = f'https://api.telegram.org/bot{TOKEN}/setWebhook'
     payload = {
         'url': WEBHOOK_URL,
@@ -72,10 +69,14 @@ if __name__ == '__main__':
     response = requests.post(url, json=payload)
 
     if response.status_code == 200:
-        print("Webhook set successfully")
+        logger.info("Webhook set successfully")
     else:
-        print(f"Failed to set webhook: {response.text}")
+        logger.error(f"Failed to set webhook: {response.text}")
 
-    # Запуск сервера FastAPI на порту 80
+# Установка вебхука при старте приложения
+set_webhook()
+
+# Запуск сервера FastAPI
+if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host='0.0.0.0', port=80)
