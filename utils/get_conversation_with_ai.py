@@ -5,7 +5,7 @@ from config import load_config
 config = load_config('config')
    
 OPENAI_API_KEY = config.gpt.token
-assistant_id = "asst_sCYeiJcWHkrMsm0I5bv8qauM"
+assistant_id = config.gpt.price_assistant_id
 import re
 
 
@@ -72,45 +72,3 @@ def get_ai_text(user_nickname, user_message):
         print(run.status)
 
 
-# if __name__ == '__main__':
-#     # user_message = "Кто сейчас правит Англией?"
-#     # user_message = "Назови мне столицу Франции"
-#     user_message = "О чем я общался с тобой в прошлый раз?"
-#     # user_message = "О чем я общался с тобой в прошлый раз?"
-
-#     # user_message = "назови id всех пользователей которые с тобой общались"
-#     # user_id = "1"
-#     user_id = "@user_nickname"
-#     # user_id = "3"
-#     get_ai_text(user_id, user_message)
-
-
-
-# def get_response(user_id, user_message):
-#     # Загружаем историю диалогов
-#     with open('history.json', 'r') as f:
-#         history = json.load(f)
-
-#     # Формируем промпт с учетом истории
-#     prompt = f"{user_message}"
-#     if user_id in history:
-#         for dialog in history[user_id][-5:]:  # Используем последние 5 диалогов
-#             prompt += f"\n{dialog['user']}: {dialog['bot']}"
-
-#     # Отправляем запрос в OpenAI API
-#     response = OpenAI(api_key=OPENAI_API_KEY)(
-#         engine="text-davinci-003",
-#         prompt=prompt,
-#         max_tokens=1024,
-#         n=1,
-#         stop=None,
-#         temperature=0.7,
-#     )
-
-
-#     # Сохраняем ответ в истории
-#     history[user_id].append({"user": user_message, "bot": response.choices[0].text.strip()})
-#     with open('history.json', 'w') as f:
-#         json.dump(history, f)
-
-#     return response.choices[0].text.strip()

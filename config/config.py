@@ -33,7 +33,6 @@ class Config:
 
 
 
-path = 'C:\\Users\\user\\1\\tg_bots\\test_llm_bot\\.env'
 
 def load_config(path: str | None = None) -> Config:
 
