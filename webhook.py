@@ -30,8 +30,15 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+from fastapi import Request
+
+@app.get("/webhook")
+async def test_webhook():
+    return {"message": "Webhook endpoint reached"}
+
 @app.post("/webhook")
-async def webhook_handler(update: Update):
+async def webhook_handler(request: Request, update: Update):
+    logger.info(f"Webhook request received: {request.url}")
     try:
         if update.message.text:
             await message_hendler(update.message)
