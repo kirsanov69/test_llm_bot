@@ -26,7 +26,7 @@ Uvicorn: ASGI server for FastAPI
 
 Requests: HTTP library for Python
 
-Architecture
+**Architecture**
 
 FastAPI Application: The main web server that handles incoming HTTP requests and processes them.
 
